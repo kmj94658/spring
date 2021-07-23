@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+ 'use strict';
+ 
+ const $homeBtn = document.getElementById('home');
+ $homeBtn.addEventListener('click',e=>{
+	window.location.href="/";
+})

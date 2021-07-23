@@ -1,0 +1,13 @@
+package com.kh.myapp.member.svc;
+
+import com.kh.myapp.member.dto.MemberDTO;
+
+public class MemberSVCImpl implements MemberSVC {
+
+	@Override
+	public int joinForm(MemberDTO memberDTO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

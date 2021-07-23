@@ -1,0 +1,38 @@
+package com.kh.myapp.member.dao;
+
+//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.kh.myapp.member.dto.MemberDTO;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Repository
+@Slf4j
+@RequiredArgsConstructor //멤버필드가 final인 필드를 매개변수로 하는 생성자를 자동 만들어준다
+public class MemberDAOImpl implements MemberDAO {
+
+	private final JdbcTemplate jdbcTemplate;
+	
+	/**
+	 * 회원가입
+	 */
+	@Override
+	public int joinMember(MemberDTO memberDTO) {
+		log.info("int joinMember(MemberDTO memberDTO) 호출됨!");
+		log.info("id:{}, pwd:{}, nickname:{}",
+				memberDTO.getId(),memberDTO.getPwd(),memberDTO.getNickname());
+		
+		
+		String sql = "insert into member values(?,?,?)";
+		
+		int result = jdbcTemplate.update(sql,
+																			memberDTO.getId(),
+																			memberDTO.getPwd(),
+																			memberDTO.getNickname());
+		return result;
+	}
+
+}

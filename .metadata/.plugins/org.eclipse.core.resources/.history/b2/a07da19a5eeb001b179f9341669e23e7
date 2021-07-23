@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+ 'use strict';
+ 
+ const $delBtns = document.querySelectorAll('.delBtn');
+ /*
+ for(let i=0; i<$delBtns.length; i++) {
+	$delBtns[i].addEventListener('click',e=>{
+		console.log('삭제버튼 클릭됨!');
+	})};*/
+	
+	Array.from($delBtns).forEach(ele=> {
+		ele.addEventListener('click', e=>{
+			console.log("삭제버튼 클릭됨!");
+		})
+	})
+	
+ const $modifyBtns = document.querySelectorAll('.modifyBtn');
+ for(let i=0; i<$modifyBtns.length; i++) {
+	$modifyBtns[i].addEventListener('click',e=>{
+		console.log('수정버튼 클릭됨!');
+	})};
+	

@@ -1,0 +1,12 @@
+package com.kh.myapp.member.dao;
+
+import com.kh.myapp.member.dto.MemberDTO;
+
+public interface MemberDAO {
+	/**
+	 * 회원가입
+	 * @param memberDTO
+	 * @return
+	 */
+	int joinMember(MemberDTO memberDTO);
+}

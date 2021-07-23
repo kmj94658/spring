@@ -1,0 +1,39 @@
+package com.kh.myapp.member.svc;
+
+import java.util.List;
+
+import com.kh.myapp.member.dto.MemberDTO;
+
+public interface MemberSVC {
+	
+	/**
+	 * 회원 가입
+	 * @param memberDTO
+	 */
+	int joinMember(MemberDTO memberDTO);
+	
+	/**
+	 * 회원수정
+	 */
+	int modifyMember(MemberDTO memberDTO);
+	
+	/**
+	 * 회원조회
+	 * @param id
+	 * @return
+	 */
+	MemberDTO searchMember(String id);
+	
+	/**
+	 * 회원탈퇴
+	 * @param memberDTO
+	 * @return
+	 */
+	int deleteMember(MemberDTO memberDTO);
+	
+	/**
+	 * 회원전체조회
+	 * @return
+	 */
+	List<MemberDTO> memberList();
+}

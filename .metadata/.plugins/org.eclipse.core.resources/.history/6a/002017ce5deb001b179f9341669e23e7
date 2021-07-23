@@ -1,0 +1,7 @@
+/**
+ * 
+ */
+ 'use strict';
+ 
+ const $delBtns = document.querySelectorAll('.delBtn');
+ console.log($delBtns);

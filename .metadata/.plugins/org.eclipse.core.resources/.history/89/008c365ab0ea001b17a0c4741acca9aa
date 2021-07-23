@@ -1,0 +1,5 @@
+package com.kh.myapp.member.svc;
+
+public interface MemberSVC {
+
+}

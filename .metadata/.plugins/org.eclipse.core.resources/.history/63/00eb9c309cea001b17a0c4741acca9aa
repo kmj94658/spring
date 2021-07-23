@@ -1,0 +1,13 @@
+package com.kh.myapp.member.dao;
+
+import com.kh.myapp.member.dto.MemberDTO;
+
+public class MemberDAOImpl implements MemberDAO {
+
+	@Override
+	public int joinMember(MemberDTO memberDTO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

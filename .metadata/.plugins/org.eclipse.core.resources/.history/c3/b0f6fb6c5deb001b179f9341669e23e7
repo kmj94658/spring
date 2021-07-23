@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+ 'use strict';
+ 
+ const $home = document.getElementById('home');
+ $home.addEventListener('click',e=>{
+	window.location.href='/';
+});
+
+ const $delBtns = document.querySelectorAll('.delBtn');
+ console.log($delBtns);

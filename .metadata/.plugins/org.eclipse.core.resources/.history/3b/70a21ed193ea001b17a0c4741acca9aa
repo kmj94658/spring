@@ -1,0 +1,34 @@
+package com.kh.myapp.member.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import lombok.extern.slf4j.Slf4j;
+
+@Controller
+@RequestMapping("/member")
+@Slf4j
+public class MemberController {
+	
+	@GetMapping("/joinForm")
+	public String joinForm() {
+		log.info("String joinForm() 호출됨!");
+		
+		return "member/joinForm";
+	}
+	
+	@PostMapping("/join")
+	public String join() {
+		log.info("String join() 호출됨!");
+		
+		return "redirect:/";
+	}
+	@GetMapping("/join")
+	public String join2() {
+		log.info("String join2() 호출됨!");
+		
+		return "redirect:/";
+	}
+}

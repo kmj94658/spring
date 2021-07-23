@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+ 'use strict';
+ 
+ const $delBtns = document.querySelectorAll('.delBtn');
+ for(let i=0; i<$delBtns.length; i++) {
+	$delBtns[i].addEventListener('click',e=>{
+		console.log(e.target + '클릭됨!');
+	})
+}
+ console.log($delBtns);

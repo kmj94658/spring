@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품목록</title>
+<script src="/js/productList.js" defer></script>
+</head>
+<body>
+<h3>상품목록</h3>
+<hr />
+<div><a href="/">홈으로</a></div>
+<div><a href="/product/addProductForm">상품등록</a></div>
+<table>
+	<tr>
+		<th>아이디</th><th>상품명</th><th>상품수량</th><th>상품가격</th>
+	</tr>
+	
+	<tr th:each="product : ${plist}">
+		<td th:text="${product.id}"></td>
+		<td th:text="${product.name}"></td>
+		<td th:text="${product.stock}"></td>
+		<td th:text="${product.price}"></td>
+		<td><button id="detailBtn" type="button">상품상세</button></td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="httpwww.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상품상세</title>
+<script src="/js/productDetail.js" defer></script>
+</head>
+<body>
+<h3>상품상세</h3>
+<hr />
+<div><a href="/">홈으로</a></div>
+<ul>
+		<li>
+			<label for="">상품아이디</label><input type="text" name="id" id="id" readonly/>
+		</li>
+		<li>
+			<label for="">상품명</label><input type="text" name="name" id="name" readonly/>
+		</li>
+		<li>
+			<label for="">상품수량</label><input type="text" name="stock" id="stock" readonly/>
+		</li>
+		<li>
+			<label for="">상품가격</label><input type="text" name="price" id="price" readonly/>
+		</li>
+		<li>
+			<button id="modifyBtn" type="button" th:data-id="${product.id}">수정</button>
+			<button id="delBtn" type="button" th:data-id="${product.id}" th:data-name="${product.name}">삭제</button>
+			<button type="button" onclick="javascript:location.href='/product/productList'">목록</button>
+		</li>
+</ul>
+</body>
+</html>

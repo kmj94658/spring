@@ -13,5 +13,5 @@
 	const $modifyBtn = document.getElementById("modifyBtn");
 		$modifyBtn.addEventListener('click', e=>{
 			const id = e.target.dataset.id;
-			window.location.href="/product/modifyForm?id="+id;
+			window.location.href="/product/modifyForm";
 		});

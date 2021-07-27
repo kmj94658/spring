@@ -3,7 +3,7 @@
  */
  'use strict';
  
- const $home = document.getElementById('home');
- $home.addEventListener('click', e=>{
-	window.location.href="/";
-});
+ 	const $home = document.getElementById('home');
+ 	$home.addEventListener('click', e=>{
+		window.location.href="/";
+		});

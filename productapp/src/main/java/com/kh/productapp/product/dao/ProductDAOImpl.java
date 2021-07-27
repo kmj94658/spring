@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class ProductDAOImpl implements ProductDAO {
+	
 	private final JdbcTemplate jdbcTemplate;
 	
 	/**
@@ -24,8 +25,11 @@ public class ProductDAOImpl implements ProductDAO {
 	public int addProduct(ProductDTO productDTO) {
 		String sql = "insert into product values(?,?,?,?)";
 		
-		int result = jdbcTemplate.update(
-				sql,productDTO.getId(),productDTO.getName(),productDTO.getStock(),productDTO.getPrice());
+		int result = jdbcTemplate.update(	sql,
+																			productDTO.getId(),
+																			productDTO.getName(),
+																			productDTO.getStock(),
+																			productDTO.getPrice());
 		return result;
 	}
 	
@@ -36,8 +40,8 @@ public class ProductDAOImpl implements ProductDAO {
 	public int modifyProduct(ProductDTO productDTO) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("update product ");
-		sql.append(" set name = ?, ");
-		sql.append(" stock = ?, ");
+		sql.append(" set name = ? , ");
+		sql.append(" stock = ? , ");
 		sql.append(" price = ? ");
 		sql.append(" where id = ? ");
 		
@@ -68,8 +72,11 @@ public class ProductDAOImpl implements ProductDAO {
 	 */
 	@Override
 	public List<ProductDTO> productList() {
-		String sql = "select id,name,stock,price from product ";
-		List<ProductDTO> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ProductDTO.class));
+		StringBuffer sql = new StringBuffer();
+		sql.append("select id, name, stock, price ");
+		sql.append(" from product ");
+		List<ProductDTO> list = jdbcTemplate.query(	sql.toString(), 
+																								new BeanPropertyRowMapper<>(ProductDTO.class));
 		return list;
 	}
 
@@ -79,11 +86,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public ProductDTO searchProduct(String id) {
 		StringBuffer sql = new StringBuffer();
-		sql.append("select id,name,stock,price ");
+		sql.append("select id, name, stock, price ");
 		sql.append(" from product ");
 		sql.append(" where id = ? ");
 		
-		ProductDTO productDTO = jdbcTemplate.queryForObject(sql.toString(), new BeanPropertyRowMapper<>(ProductDTO.class), id);
+		ProductDTO productDTO = jdbcTemplate.queryForObject(sql.toString(), new BeanPropertyRowMapper<>(ProductDTO.class),id);
 		return productDTO;
 	}
 }

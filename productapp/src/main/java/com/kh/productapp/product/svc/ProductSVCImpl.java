@@ -8,18 +8,16 @@ import org.springframework.stereotype.Service;
 import com.kh.productapp.product.dao.ProductDAO;
 import com.kh.productapp.product.dto.ProductDTO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor //생성자 만들어준다
 public class ProductSVCImpl implements ProductSVC {
 	
 	@Autowired
 	private final ProductDAO productDAO;
-	
-	public ProductSVCImpl(ProductDAO productDAO) {
-		this.productDAO = productDAO;
-	}
 	
 	/**
 	 * 상품등록

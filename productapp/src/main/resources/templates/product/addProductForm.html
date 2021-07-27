@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품등록</title>
 <script src="/js/index.js" defer></script>
 </head>
 <body>
@@ -10,21 +10,26 @@
 	<form action="/product/add" method="post">
 		<ul>
 			<li>
-				<label for="">상품아이디</label><input type="text" name="id" id="id" />
+				<label for="">상품아이디</label>
+				<input type="text" name="id" id="id" />
 			</li>
 			<li>
-				<label for="">상품명</label><input type="text" name="name" id="name" />
+				<label for="">상품명</label>
+				<input type="text" name="name" id="name" />
 			</li>
 			<li>
-				<label for="">상품수량</label><input type="text" name="stock" id="stock" />
+				<label for="">상품수량</label>
+				<input type="text" name="stock" id="stock" />
 			</li>
 			<li>
-				<label for="">상품가격</label><input type="text" name="price" id="price" />
+				<label for="">상품가격</label>
+				<input type="text" name="price" id="price" />
 			</li>
 			<li>
-				<button type="submit" id="addBtn">등록</button></li>
-			<li>
-				<button type="button" id="home">홈으로</button></li>
+				<button type="submit">등록</button>
+				<button type="reset">취소</button>
+				<button type="button" id="home">홈으로</button>
+			</li>
 		</ul>
 	</form>
 </div>

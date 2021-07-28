@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<footer th:fragment="copy">
+	<p>푸터1</p>
+</footer>
+
+<footer th:fragment="copyParam(p1,p2)">
+	<p>푸터2</p>
+	<p th:text="${p1}"></p>
+	<p th:text="${p2}"></p>
+</footer>
+
+</body>
+</html>

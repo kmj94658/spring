@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>상품수정</h3>
+<hr/>
+<form action="/product/productDetail.html"
+			<!--/* 
+			th:action="|/product/${productDTO.pid}/modi|"
+			*/--> 
+			th:action="@{/product/{pid}/modi(pid=${productDTO.pid})}"
+			method="post">
+<ul>
+	<li>
+		<label for="">상품ID</label>
+		<input type="text" name="pid" id="pid" value="pro-01" th:value="${productDTO.pid}" readonly/>
+	</li>
+	<li>
+		<label for="">상품명</label>
+		<input type="text" name="pname" id="pname" th:value="${productDTO.pname}"/>
+	</li>
+	<li>
+		<label for="">상품수량</label>
+		<input type="text" name="pcount" id="pcount" th:value="${productDTO.pcount}"/>
+	</li>
+	<li>
+		<label for="">상품가격</label>
+		<input type="text" name="pprice" id="pprice" th:value="${productDTO.pprice}"/>
+	</li>
+	<li>
+	<button type="button" th:type="submit"
+					onclick="javascript:location.href='/product/productDetail.html'"
+					th:onclick>저장</button>
+	<button type="button"
+					onclick="javascript:location.href='/product/productDetail.html'"
+					th:onclick="javascript:location.href='/product/productList'">취소</button>
+	</li>
+</ul>					
+</body>
+</html>

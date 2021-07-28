@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/product/productDetail.js" defer></script>
+</head>
+<body>
+<h3>상품상세</h3>
+<hr>
+<ul>
+	<li>
+		<label for="">상품ID</label>
+		<input type="text" id="pid" value="pro-01" th:value="${productDTO.pid}" readonly/>
+	</li>
+	<li>
+		<label for="">상품명</label>
+		<input type="text" id="pname" value="컴퓨터" th:value="${productDTO.pname}" readonly/>
+	</li>
+	<li>
+		<label for="">상품수량</label>
+		<input type="text" id="pcount" value="10" th:value="${productDTO.pcount}" readonly/>
+	</li>
+	<li>
+		<label for="">상품가격</label>
+		<input type="text" id="pprice" value="1000000" th:value="${productDTO.pprice}" readonly/>
+	</li>
+	<li>
+		<button type="button" id="modifyBtn"
+						onclick="javascript:location.href='/product/modifyProductForm.html'"
+						th:onclick="'javascript:location.href=\''+@{|/product/modifyForm/${productDTO.pid}|}+'\''">수정</button>
+		<button type="button" id="delBtn" th:data-pid="${productDTO.pid}"
+		<!--/* 
+						th:onclick="'javascript:location.href=\''+@{|/product/${productDTO.pid}/del|}+'\''"
+ 		 */-->						
+						>삭제</button>
+		<button type="button"
+						onclick="javascript:location.href='/product/productList'">목록</button>
+	</li>
+</ul>					
+</body>
+
+
+
+
+
+
+</html>

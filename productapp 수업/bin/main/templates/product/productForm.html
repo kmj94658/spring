@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>상품등록</h3>
+<hr />
+<form action="/product" method="post">
+<ul>
+	<li>
+		<label for="">상품ID</label>
+		<input type="text" name="pid" id="pid" />
+	</li>
+	<li>
+		<label for="">상품명</label>
+		<input type="text" name="pname" id="pname" />
+	</li>
+	<li>
+		<label for="">상품수량</label>
+		<input type="text" name="pcount" id="pcount" />
+	</li>
+	<li>
+		<label for="">상품가격</label>
+		<input type="text" name="pprice" id="pprice" />
+	</li>
+	<li>
+		<button type="submit">저장</button>
+		<button type="reset">취소</button>						
+		<button type="button" 
+						onclick="javascript:location.href='/product/productList'">목록</button>
+	</li>
+</ul>
+
+</form>
+</body>
+</html>
+
+
+

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>상품목록</h3>
+<hr />
+<table>
+	<tr>
+		<th>상품ID</th>
+		<th>상품명</th>
+		<th>수량</th>
+		<th>가격</th>
+	</tr>
+
+	<tr th:each="product : ${pList}">
+		<td><a href="/product/productDetail"
+				<!--/*	 
+						th:href="|/product/productDetail?pid=${product.pid}|"
+				*/-->
+					 th:href="|/product/productDetail/${product.pid}|"
+					 th:text="${product.pid}">pro-01</a></td>
+		<td th:text="${product.pname}">컴퓨터</td>
+		<td th:text="${product.pcount}">10</td>
+		<td th:text="${product.pprice}">1,000,000</td>
+	</tr>	
+
+</table>
+<button type="submit" 
+				onclick="javascript:location.href='/product/productForm'">등록</button>
+</body>
+</html>

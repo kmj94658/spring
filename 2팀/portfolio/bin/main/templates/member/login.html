@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/mainCss.css">
+  <link rel="stylesheet" href="/css/member/loginCss.css">
+  <title>로그인</title>
+</head>
+<body>
+  <header th:replace="/fragment/fragment_header :: fragment_header">
+  	연습용 빈 헤더입니다.
+  </header>
+  <nav th:replace="/fragment/fragment_nav :: fragment_nav">
+  	연습용 빈 nav입니다.
+  </nav>
+
+  <div class="all_container">
+    <div class="loginTitle">로그인</div>
+    <form action="">
+      <div class="insert_container">
+        <input type="text">
+        <input type="password">
+      </div>
+      <div class="Btn_container">
+        <button type="submit" id="loginBtn">로그인</button>
+        <button type="button" id="joinBtn">회원가입</button>
+      </div>
+    </form>
+    <div class="find_container">
+      <div id="findId">아이디 찾기</div>
+      <div id="findPwd">비밀번호 찾기</div>
+   </div>
+    <hr>
+   <div class="SNSloginTitle">SNS 계정 간편로그인</div>
+   <div class="SNSBtn_container">
+    <button type="button">Google</button>
+    <button type="button">naver</button>
+    <button type="button">kakao</button>
+   </div>
+  </div>
+  
+    <footer th:replace="/fragment/fragment_footer :: fragment_footer">
+  	연습용 빈 footer입니다.
+  </footer>
+</body>
+</html>

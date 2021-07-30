@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+body{
+  display: grid;
+  justify-content: center;
+}
+div.all_container{
+  width: 300px;
+}
+
+div.loginTitle{
+  text-align: center;
+  size: 100px;
+  margin-bottom: 25px;
+}
+
+div.insert_container{
+  display: grid;
+  grid-template-rows: repeat(2, 30px);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+div.Btn_container{
+  display: grid;
+  grid-template-rows: repeat(2, 30px);
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+div.find_container{
+  display: grid;
+  grid-template-columns: repeat(2, 120px);
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+div#findId,div#findPwd{
+  text-align: center;
+}
+
+div.SNSloginTitle{
+  margin-top: 30px;
+  text-align: center;
+  size: 25px;
+  margin-bottom: 10px;
+}
+
+div.SNSBtn_container{
+  text-align: center;
+}

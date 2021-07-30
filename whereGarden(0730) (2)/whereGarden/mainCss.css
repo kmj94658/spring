@@ -1,0 +1,118 @@
+/* 마포꽃섬 폰트적용 */
+/* font-family: 'MapoFlowerIsland'; 으로 사용가능 */
+@font-face {
+  font-family: 'MapoFlowerIsland';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 전체적인 outline 확인용 */
+/* *{outline: 1px solid red;} */
+/* 바디에 그리드 적용 */
+body{
+  display: grid;
+  justify-content: center;
+}
+/* header~footer까지 감싸는 컨테이너 */
+div.all_container{
+  width: 1000px;
+}
+
+/* header 시작 */
+/* header안에 div.top, div.title 존재 */
+header{
+  width: 100%;
+  height: 150px;
+  margin-bottom: 120px;
+}
+/* header안에 div.top안에 img#user, img#shopping_basket 존재  */
+div.top{
+  width: 100%;
+  height: 30px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(2,70px); /* 여기 가로가 100px 이라서 이미지에 50px하니까 공백생김 따라서 이미지랑 맞춰줘야함*/
+  gap: 0 10px;
+  justify-content: end;
+}
+button#login,button#join{
+  font-family: 'NanumSquare';
+  border: 0;
+  background-color: white;
+}
+i#user, i#shopping_basket{
+  font-size: 30px;
+  color:grey;
+}
+/* header안에 div.title 존재  */
+div.title{
+  width: 300px; height: 150px;
+  margin: 0 auto;
+}
+div>img#title{
+  width: 100%; height: 100%;
+}
+
+/* nav 시작 */
+/* nav안에 div.menu_container 존재 */
+div.menu_container{
+  height: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 100px);
+  justify-content: center;
+  gap: 0 250px;
+  margin-bottom: 30px;
+}
+/* nav안에 div.menu_container안에 div.find, div.community 존재 */
+div.find, div.community{
+  font-family: 'NanumSquare';
+  font-size: 25px;
+  text-align: center;
+}
+
+/* 비밀번호찾기 시작 */
+.container{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-family: 'NanumSquare';
+  padding: 20px 0;
+}
+.container2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 310px;
+}
+
+p#pw_title{
+  font-size: 25px;
+  text-align: center;
+}
+p#pw_sub{
+  text-align: center;
+}
+
+.pw_gap{
+  height: 30px;
+  margin: 2px 0;
+}
+
+.container2 .pw_subs{
+ text-align: end;
+ margin-bottom: 0;
+}
+
+/* footer 시작 */
+footer{
+  width: 100%; height: px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 200px 400px;
+  gap: 30px;
+}
+img#footerImg{
+  width: 200px; height: 130px;
+}

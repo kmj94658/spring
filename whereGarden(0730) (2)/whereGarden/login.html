@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="mainCss.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+  <title>어딜, 가든</title>
+  <style>
+    *{
+      /* outline: 1px solid red; */
+    }
+    ul {
+    list-style-type: none;
+    }
+    input{
+      margin-top: 10px;
+      width:200px;
+      height:30px
+    }
+
+    button{
+      width: 250px;
+      height: 40px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .title{
+      /* grid-area: title; */
+      text-align:  center;
+    }
+    p{
+      font-weight: bold;
+    }
+    .Container{
+      height: 400px;
+            display: grid;
+            /* grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); */
+            grid-template-columns: 350px 10px 350px ;
+            text-align: center;
+     }
+     .loginForm{
+      padding-top: 30px;
+       margin-top: 20px;
+     }
+
+     .snsForm{
+      padding-top: 30px;
+      margin-top: 20px;
+     }
+     .updown { 
+            border: 1px solid black;
+            width: 0.1px;
+            height:300px; 
+            }
+
+
+  </style>
+
+</head>
+
+<body>
+  <div class="all_container">
+    <header>
+      <div class="top">
+        <button type="button" id="login">로그인</button>
+        <button type="button" id="join">회원가입</button>
+      </div>
+      <div class="title">
+        <img src="title.png" alt="어딜가든" id="title">
+      </div>
+    </header>
+
+    <nav class="menu">
+      <div class="menu_container">
+        <div class="find">상품관리</div><div class="community">커뮤니티</div>
+      </div>
+      <hr>
+    </nav>
+
+    <div class="Container">
+        <div class="loginForm">
+          <p>로그인</p>
+          <ul>
+            <li>
+              <label for="mid"> ID</label>
+              <input type="text" name="mid" id="mid" class="mid" >
+            </li>
+            <li>
+              <label for="mpw"> PW</label>
+              <input type="password" name="mpw" id="mpw" class="mpw" ></li>
+            <li>
+              <a href="###">회원가입</a>
+              <a href="###">아이디찾기</a>
+              <a href="###">비밀번호찾기</a>
+            </li>
+            <li>
+              <button class="login">Login</button>
+            </li>
+          </ul>
+          </div>
+          <div class="updown"></div>
+          <div class="snsForm">
+            <p>sns로 로그인</p>
+            <ul>
+              <li>
+                <button>네이버</button>
+              </li>
+              <li>
+                <button>카카오</button>
+              </li>
+              <li>
+                <button>구글</button>
+              </li>
+            </ul>
+          </div>
+    </div>
+  
+    
+    <hr>
+    <footer>
+      <div class="imgBox">
+        <img src="title.png" alt="Logo" id="footerImg">
+      </div>
+      <div class="footer_explane">
+        <ul>
+          <li>상호명 : 어딜, 가든</li>
+          <li>사업자등록번호 : 111-22-33333</li>
+          <li>주소 : 울산 남구 삼산로 35번길 19</li>
+          <li>TEL : 052-111-2222</li>
+          <li>Email : whereGarden@garden.co.kr</li>
+          <li>Copyright 2021 어딜,가든 All Rights Reserved</li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

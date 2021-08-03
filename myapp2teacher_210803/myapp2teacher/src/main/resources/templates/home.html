@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" 
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<p th:text=${session}></p>
+<p th:text=${#session}></p>
+	<!-- 로그인전 -->
+	<ul th:if="${#session} == null">
+		<li><a href="/members/join">회원가입</a></li>
+		<li><a href="/login">로그인</a></li>
+		<li></li>
+	</ul>
+	<!-- 로그인 후 관리자-->
+	<ul th:if="${#session != null && session.loginMember.admin}">
+		<p th:text="${session.loginMember.nickname}"></p>
+		<li><a href="">내정보</a></li>
+		<li><a href="/logout">로그아웃</a></li>
+		<li><a href="/products">상품목록</a></li>		
+		<li>관리자로 로그인</li>
+	</ul>	
+	<ul th:if="${#session != null && !session.loginMember.admin}">
+		<p th:text="${session.loginMember.nickname}"></p>
+		<li><a href="">내정보</a></li>
+		<li><a href="/logout">로그아웃</a></li>
+		<li><a href="/products">상품목록</a></li>
+		<li>일반회원 로그인</li>
+	</ul>	
+</body>
+</html>

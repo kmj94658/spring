@@ -1,0 +1,71 @@
+REST API
+-http 프로토콜의 post,get,put,patch,delete 메서드를 각각 crud 동작과 연결하는 것을 RESTful하다 라고 말한다.
+-메서드는 리소스에 대한 행위이다.
+-uri 매핑전략을 짤때 
+
+<회원예제>
+-uri : 리소스, 명사를 사용
+요청		메소드	URI			페이로드	양식
+-회원가입양식	get	/members/add		X	addForm.html
+-회원가입처리	post	/members/add		O	
+-회원수정양식	get 	/members/{id}/edit		X	editForm.html
+			/members/edit/?id=000
+-회원수정처리	patch	/members/{id}/edit		O
+			/members/edit/?id=000
+-회원조회		get	/members/{id}		X	detail.html
+-회원탈퇴		delete	/members/{id}		X
+-회원목록		get	/members		X	members.html
+			/members/{page}/{size}
+
+@Valid : 유효성 검증하는 객체
+@NotBlank 문자열, NotNull이면서 문자길이가 0보다 커야한다
+@NotEmpty 문자열, 컬렉션타입, NotNull이면서 문자길이가 0보다 크거나 컬렉션은 1개 이상
+@NotNull 모든타입
+
+빌트인 constraints
+https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#section-builtin-constraints
+
+BindingResult : 유효성 검증의 결과를 받아오는 객체
+Reject, RejectValue 메소드
+
+타임리프 오류
+th:errors="${}"
+스타일 주고싶다면
+th:errorclass="클래스명"
+
+글로벌 오류
+th:if="${#fields.hasErrors('global')}"
+th:if="${#fields.hasGlobalErrors()}" 두개 똑같다.
+
+@ModelAttribute 
+1. view 데이터를 개체에 바인딩할 때 사용
+2. model객체에 소문자이름으로 저장된다
+ex) @ModelAttribute MemberForm memberForm
+ex) model.addAttribute("memberForm", memberForm)
+
+폼 태그에 th:object 속성주기
+ex) <form th:object="${memberForm}">
+폼태그와 memberForm 객체가 바인딩 된다.
+그러면 ${memberForm.id} 대신 *{id}로 접근 가능(코드 줄이기 가능!) 
+마찬가지로 에러도 th:errors="*{id}"로 접근 가능
+
+폼태그 내에서 for속성과 id가 같아야 싱크 맞춰진다. (텍스트 클릭해도 체크 먹음)
+
+정규표현식(비밀번호 조합 가능)
+
+1.세션 동작방식에 대한 이해
+  클라이언트 인증성공 -> 세션생성(server) -> 세션아이디 쿠키 지정(client) -> 이후 클라이언트 요청시 세션아이디를 요청헤더에 포함
+2.세션 생성
+  HttpServletRequest request
+  HttpSession session = request.getSession(true); --세션이 없으면 신규생성, 있으면 해당세션 가져온다
+3.세션 가져오기
+ HttpSession session = request.getSession(false); --세션이 존재하면 가져오고 없어도 신규생성하지는 않는다
+4.세션 제거(-로그아웃 했을때, -안하고 그냥 브라우저 나가면 모르기 때문에 유효시간 설정)
+  session.invalidate();
+5.세션에 클라이언트 정보 저장
+  session.setAttribute('키','값');
+6.세션에 클라이언트 정보 읽기
+  session.getAttribute('키');
+7.세션 유효시간(최근 요청시간을 기준으로 갱신)
+  글로벌 설정 -> application.properties : server.servlet.session.time=1800 (분단위로 설정, 기본은 30분)
+  특정세션단위 설정 -> session.setMaxInactiveInterval(900);

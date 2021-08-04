@@ -66,6 +66,19 @@ ex) <form th:object="${memberForm}">
   session.setAttribute('키','값');
 6.세션에 클라이언트 정보 읽기
   session.getAttribute('키');
-7.세션 유효시간(최근 요청시간을 기준으로 갱신)
+7.세션 유효시간(최근 요청시간을 기준으로 갱신) 4번과 병행
   글로벌 설정 -> application.properties : server.servlet.session.time=1800 (분단위로 설정, 기본은 30분)
   특정세션단위 설정 -> session.setMaxInactiveInterval(900);
+
+-클라이언트 정보(세션아이디)
+-세션이 왜 존재하는가: 한번 리스폰스 하고나면 정보가 끊김. 클라이언트와 서버간의 상태정보를 유지하기 위한 기술
+
+1.view
+ 회원가입, 회원조회, 회원수정
+2.controller
+-url매핑, REST api
+-검증로직
+3.service
+-controller와 repository 사이의 매핑
+4.repository
+-db연동

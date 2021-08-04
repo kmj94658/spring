@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" 
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로긴</title>
+</head>
+<body>
+  <h2>로그인</h2>
+  <form action="" th:method="post" th:object="${loginForm}">
+  	<p th:if="${#fields.hasErrors('global')}" th:errors="*{global}">글로벌오류=오브젝트레벨의 오류</p>
+	  <ul>
+	  	<li><input type="text" name="id" id="id" th:field="*{id}" placeholder="아이디를 입력하세요"/></li>
+	  	<li th:if="${#fields.hasErrors('id')}"><p th:errors="*{id}" th:text></p></li>
+	  	<li><input type="password" name="pw" id="pw" th:field="*{pw}" placeholder="비밀번호를 입력하세요"/></li>
+	  	<li th:if="${#fields.hasErrors('pw')}"><p th:errors="*{id}" th:text></p></li>
+	  	<li><button type="submit">로그인</button></li>
+	  </ul>
+  </form>
+</body>
+</html>

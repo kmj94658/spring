@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 수정</title>
+</head>
+<body>
+  <h3>공지 수정</h3>
+  <hr />
+  <form action="/gongi/gongiDetail.html" th:action="@{gongi/edit/{num}(num=${gongiDTO.num})}" method="post">
+  	<ul>
+  		<li>
+  			<label for="">작성자</label>
+  			<input type="text" name="writer" id="writer" th:value="${gongiDTO.writer}"/>
+  		</li>
+  		<li>
+  			<label for="">제목</label>
+  			<input type="text" name="title" id="title" th:value="${gongiDTO.title}"/>
+  		</li>
+  		<li>
+  			<label for="">내용</label>
+  			<textarea name="content" id="content" cols="30" rows="10" th:value="${gongiDTO.content}"></textarea>
+  		</li>
+  		<li>
+  			<button type="button" onclick="javascript:location.href='/gongi/gongiDetail.html'" th:onclick="javascript:location.href='/gongi/detail/{gongiDTO.num}">저장</button>
+  			<button type="button" onclick="javascript:location.href='gongi/gongiDetail'" th:onclick="javascript:location.href='/gongi/gongiList'">취소</button>
+  		</li>
+  	</ul>
+  </form>
+</body>
+</html>

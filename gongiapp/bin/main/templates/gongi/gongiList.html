@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 목록</title>
+</head>
+<body>
+  <h3>공지 목록</h3>
+  <hr />
+  <table>
+	  <tr>
+	  	<th>번호</th>
+	  	<th>작성자</th>
+	  	<th>제목</th>
+	  	<th>내용</th>
+	  	<th>작성일시</th>
+	  	<th>수정일시</th>
+	  </tr>
+	  
+	  <tr th:each="gongi : ${glist}"> 
+	  	<td><a href="/gongi/gongiDetail" th:href="|/gongi/detail/${gongi.num}|"
+						 th:text="${gongi.num}"></a></td>	 
+	  	<td th:text="${gongi.writer}"></td>
+	  	<td th:text="${gongi.title}"></td>
+	  	<td th:text="${gongi.content}"></td>
+	  	<td th:text="${gongi.wdate}"></td>
+	  	<td th:text="${gongi.udate}"></td>
+	  </tr>
+	 
+  </table>
+  <button type="button" onclick="javascript:location.href='/gongi/create'">등록</button>
+</body>
+</html>

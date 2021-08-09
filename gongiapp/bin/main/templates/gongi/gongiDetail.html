@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>공지 상세</title>
+</head>
+<body>
+  <h3>공지 상세</h3>
+  <hr />
+  <form>
+  	<ul>
+  		<li>
+  			<label for="">번호</label>
+  			<input type="text" name="num" id="num" th:value="${gongiDTO.num}" readonly/>
+  		</li>
+  		<li>
+  			<label for="">작성자</label>
+  			<input type="text" name="writer" id="writer" th:value="${gongiDTO.writer}" readonly/>
+  		</li>
+  		<li>
+  			<label for="">제목</label>
+  			<input type="text" name="title" id="title" th:value="${gongiDTO.title}" readonly/>
+  		</li>
+  		<li>
+  			<label for="">내용</label>
+  			<textarea name="content" id="content" cols="30" rows="10" th:text=${gongiDTO.content} readonly></textarea>
+  		</li>
+  		<li>
+  			<label for="">작성일자</label>
+  			<input type="text" name="wdate" id="wdate" th:value="${gongiDTO.wdate}" readonly/>
+  		</li>
+  		<li>
+  			<label for="">수정일자</label>
+  			<input type="text" name="udate" id="udate" th:value="${gongiDTO.udate}" readonly/>
+  		</li>
+  		<li>
+  			<button type="button" onclick="javascript:location.href='/gongi/edit'"
+						th:onclick="'javascript:location.href=\''+@{|/gongi/edit/${gongiDTO.num}|}+'\''">수정</button>
+  			<button type="button" th:onclick="'javascript:location.href=\''+@{|/gongi/del/${gongiDTO.num}|}+'\''">삭제</button>
+  			<button type="button" th:onclick="javascript:location.href='/gongi/gongiList'">목록</button>
+  		</li>
+  	</ul>
+  </form>
+</body>
+</html>

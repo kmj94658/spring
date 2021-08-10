@@ -20,8 +20,7 @@ public class GongiSVCImpl implements GongiSVC {
 	 */
 	@Override
 	public GongiDTO createGongi(GongiDTO gongiDTO) {
-		gongiDAO.createGongi(gongiDTO);
-		return gongiDAO.findGongi(gongiDTO.getNum());
+		return gongiDAO.createGongi(gongiDTO);
 	}
 	
 	/**

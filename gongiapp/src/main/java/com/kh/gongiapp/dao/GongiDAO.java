@@ -26,7 +26,7 @@ public interface GongiDAO {
 	 * @param gongiDTO
 	 * @return
 	 */
-	GongiDTO editGongi(String num, GongiDTO gongiDTO);
+	GongiDTO editGongi(String num, GongiDTO gongiDTO); //수정해서 수정한 결과를 반환할수 있도록
 	
 	/**
 	 * 공지 삭제

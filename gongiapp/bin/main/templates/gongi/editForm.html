@@ -9,7 +9,7 @@
 <body>
   <h3>공지 수정</h3>
   <hr />
-  <form action="/gongi/gongiDetail.html" th:action="@{gongi/edit/{num}(num=${gongiDTO.num})}" method="post">
+  <form action="/gongi/gongiDetail.html" th:action="|/gongi/edit/${gongiDTO.num}|" method="post">
   	<ul>
   		<li>
   			<label for="">작성자</label>
@@ -24,7 +24,7 @@
   			<textarea name="content" id="content" cols="30" rows="10" th:value="${gongiDTO.content}"></textarea>
   		</li>
   		<li>
-  			<button type="button" onclick="javascript:location.href='/gongi/gongiDetail.html'" th:onclick="javascript:location.href='/gongi/detail/{gongiDTO.num}">저장</button>
+  			<button type="button" th:type="submit" onclick="javascript:location.href='/gongi/gongiDetail.html'" th:onclick>저장</button>
   			<button type="button" onclick="javascript:location.href='gongi/gongiDetail'" th:onclick="javascript:location.href='/gongi/gongiList'">취소</button>
   		</li>
   	</ul>

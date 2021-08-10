@@ -48,11 +48,10 @@ public class GongiController {
 		log.info("num:{}, writer:{}, title:{}, content:{}, wdate:{}, udate:{}",
 							gongiDTO.getNum(),gongiDTO.getWriter(),gongiDTO.getTitle(),gongiDTO.getContent(),gongiDTO.getWdate(),gongiDTO.getUdate());
 		
-		model.addAttribute("gongiDTO", gongiDTO);
 		GongiDTO storedGongiDTO =  gongiSVC.createGongi(gongiDTO);
 		model.addAttribute("gongiDTO", storedGongiDTO);
-		redirectAttributes.addAttribute("num", storedGongiDTO);
-		return "/gongi/detail/{num}";
+		redirectAttributes.addAttribute("num", storedGongiDTO.getNum());
+		return "redirect:/gongi/detail/{num}";
 	}
 	
 	/**
@@ -134,7 +133,7 @@ public class GongiController {
 	 * @return
 	 */
 	@GetMapping("/detail/{num}")
-	public String gongiDetail(@PathVariable String num, Model model) {
+	public String gongiDetail(@PathVariable("num") String num, Model model) {
 		GongiDTO gongiDTO = gongiSVC.findGongi(num);
 		model.addAttribute("gongiDTO", gongiDTO);
 		

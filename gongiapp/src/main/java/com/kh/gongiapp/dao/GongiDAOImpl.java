@@ -24,14 +24,12 @@ public class GongiDAOImpl implements GongiDAO {
 	public GongiDTO createGongi(GongiDTO gongiDTO) {
 
 		StringBuffer sql = new StringBuffer();
-		sql.append("insert into gongi(num,writer,title,content,wdate,udate) ");
-		sql.append(" values(('공지사항.'||gongi_num_seq.nextval),?,?,?,?,?) ");
+		sql.append("insert into gongi(num,writer,title,content) ");
+		sql.append(" values(('공지사항.'||gongi_num_seq.nextval),?,?,?) ");
 		jt.update(sql.toString(),
 							gongiDTO.getWriter(),
 							gongiDTO.getTitle(),
-							gongiDTO.getContent(),
-							gongiDTO.getWdate(),
-							gongiDTO.getUdate());
+							gongiDTO.getContent());
 		return findGongi(gongiDTO.getNum());
 	}
 

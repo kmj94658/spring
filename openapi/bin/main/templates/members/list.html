@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>회원목록</title>
+  <script src="/js/ajaxCall.js"></script>
+</head>
+<body>
+	<h3>회원등록</h3>
+	<hr />
+	<form action="#">
+		<ul>
+			<li><label for="name">이름</label><input type="text" name="name" id="name"></li>
+			<li><label for="age">나이</label><input type="text" name="age" id="age"></li>
+			<li><button type="button" id="registBtn">등록</button></li>
+		</ul>
+	</form>
+	<script>
+	const name = document.getElementById('name');
+	const age = document.getElementById('age');
+	
+		registBtn.addEventListener("click",e=>{
+			
+			const URL = 'http://localhost:9080/members';
+			//const HTTP_METHOD = 'post';
+			const person = { "name": name.value, "age": age.value};
+			//console.log(person);
+			//const payload = JSON.stringify(person);
+			//console.log(payload);
+			
+			request.post(URL,person)
+			.then(res => res.text())
+			.then(res => {
+				if(res != 'ok'){
+					throw new Error('오류!!');
+				}
+				console.log(res)})
+			.catch(err => {
+				alert(err);
+				console.log(err)
+			});
+			
+		});
+	</script>
+	
+  <h3>회원목록</h3>
+  <hr />
+  <button id="getBtn">가져오기</button>
+  <div id="list"></div>
+  <script>
+  	getBtn.addEventListener("click",getMember);
+  	
+  	//case1
+  	/* function getMember(){
+		  fetch("http://localhost:9080/ajax/get/2")
+		  		.then(function(response){
+		  			return response.json();
+		  	})
+		  	.then(function(todo){
+		  		let str = "";
+		  		str = '<p>';
+		  		for(const ele in todo){
+		  			str += `${todo[ele].name} ${todo[ele].age}`;
+		  			str += "<br>";
+		  			console.log(`${ele}: ${todo[ele].name}`);
+		  			console.log(`${ele}: ${todo[ele].age}`);
+		  		}
+		  		str = '</p>';
+		  		list.innerHtml = str;
+		  		console.log(str);
+		  	});
+  		} */
+  	
+  	function getMember(){
+		  request.get("http://localhost:9080/ajax/get/2")
+		  		.then(res => res.json())
+			  	.then(todo => print(todo));
+  	}
+  		
+  	function print(todo){
+			let str = "";
+			str = '<p>';
+			for(const ele in todo){
+			  str += `${todo[ele].name} ${todo[ele].age}`;
+			  str += "<br>";
+			}
+			str += '</p>';
+			list.innerHtml = str;
+		}
+  		
+		
+  </script>
+</body>
+</html>

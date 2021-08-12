@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>코비드 현황</title>
+  <script src="/js/ajaxCall.js"></script>
+</head>
+<body>
+  <h3>코비드 현황</h3>
+  <hr />
+  <ul>
+  	<li>
+  		<label for="">기간</label>
+  		<input type="date" name="from" id="from" />~<input type="date" name="to" id="to" />
+  		<button type="button" id="searchBtn">조회</button>
+  	</li>
+  </ul>
+  <div id="list"></div>
+  <script>
+  	let l_from = '';
+  	let l_to = '';
+  	
+  	const now = new Date();
+  	const year = now.getFullYear();
+  	let month = '00'+(now.getMonth()+1); //00은 두자리 포맷 위해서
+  	month = month.substr(-2);
+  	let date = '00'+now.getDate();
+  	date = date.substr(-2);
+  	
+  	from.value = `${year}-${month}-${date-1}`;
+  	to.value = `${year}-${month}-${date}`;
+  	console.log(from.value);
+  	
+  	searchBtn.addEventListener("click", e=>{
+  		l_from = from.value.replaceAll('-','');
+  		l_to = to.value.replaceAll('-','');
+  		console.log(l_from, l_to);
+  		getCovid();
+  	});
+  	
+  	function getCovid() {
+	  	const url = 'http://localhost:9080/api/covid';
+	  	const queryString = `?pageNo=''&numOfRows=''&startCreateDt=${l_from}&endCreateDt=${l_to}`;
+	  	request.get(url+queryString)
+	  		.then(res => res.json()) //json포맷 문자열 =>js객체로 변환
+	  		.then(res => {
+	  			if(res.response.header.resultCode == '00') {
+	  				return res.response.body;
+	  			} else {
+	  				throw new Error(res.response.header.resultMSG);
+	  			}
+	  			console.log(res)
+	  		})
+	  		.then(body=>{print(body.items.item); console.log(body)})
+	  		.catch(err=> console.log(err));
+	  		
+  	}
+  	function print(item){
+  		console.log(item);
+  		let html = '';
+  		html += '<table border="1">';
+  		html += '  <thead>';
+  		html += '    <tr>';
+  		html += '      <th>기준일</th>';
+  		html += '      <th>확진자수</th>';
+  		html += '      <th>사망자수</th>';
+  		html += '    </tr>';
+  		html += '  </thead>';
+  		html += '  <tbody>';
+  		for(const rec of item) {
+  			html += '      <tr>';
+  			html += `<td>${rec.stateDt}</td>`;
+  			html += `<td>${rec.decideCnt}</td>`;
+  			html += `<td>${rec.deathCnt}</td>`;
+  			html += '      </tr>';
+  			console.log(rec.stateDt,rec.decideCnt,rec.deathCnt);
+  		}
+  		html += '  </tbody>';
+  		html += '</table>';
+  		
+  		list.innerHTML = html;
+  	}
+  </script>
+</body>
+</html>

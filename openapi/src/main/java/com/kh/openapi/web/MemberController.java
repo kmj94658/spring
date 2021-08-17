@@ -35,4 +35,28 @@ public class MemberController {
 		
 		return result;
 	}
+	
+	//my fetch
+	@GetMapping("/memberAPI")
+		public String ajaxTest() {
+		return "members/memberAPI";
+	}
+	
+	//XMLHttpRequest
+	@GetMapping("/memberAPI2")
+	public String ajaxTest2() {
+	return "members/memberAPI2";
+	}
+	
+	//fetch
+	@GetMapping("/memberAPI3")
+		public String ajaxTest3() {
+		return "members/memberAPI3";
+	}
+	
+	//my fetch
+	@GetMapping("/memberAPI4")
+	public String ajaxTest4() {
+	return "members/memberAPI4";
+}
 }

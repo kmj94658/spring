@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/js/ajaxCall.js"></script>
+</head>
+<body>
+	<h3>HTTP API AJAX TEST!</h3>
+	<form action="">
+		아이디: <input type="text" name="id" id="id" /><br />
+		비밀번호: <input type="text" name="pw" id="pw" /><br />
+		이름: <input type="text" name="name" id="name" /><br />
+	</form>
+	<div id="errmsg"></div>
+	<div><button type="button" id="addBtn">등록</button></div>
+	<div><button type="button" id="modiBtn">수정</button></div> 
+	<div><button type="button" id="findBtn">조회</button></div> 
+	<div><button type="button" id="delBtn">삭제</button></div> 
+	<div><button type="button" id="allBtn">전체목록</button></div> 
+	<div><button type="button" id="clearBtn">전체삭제</button></div> 
+ <script>
+ 	const $id = document.getElementById('id');
+	const $pw = document.getElementById('pw');
+	const $name = document.getElementById('name');
+	
+ 	const addBtn_f = e => {
+ 		console.log('addBtn_f');
+ 		
+ 		const METHOD = 'POST';
+ 		const URL = 'api/members';
+ 		const data = {"id":$id.value, "pw":$pw.value, "name":$name.value};
+ 		
+ 		fetch(URL, 
+ 					{method: METHOD, 
+ 						headers:{
+ 						'Content-Type' : 'application/json', 
+ 						'Accept' : 'application/json'}, 
+ 						body: JSON.stringify(data)}) //바디는 문자열로 전달 후에
+ 						.then(res=>res.json()) //자바스크립트로 변환
+ 						.then(res=>{
+ 							if(res.rtcd == '00') {
+ 								//성공로직처리
+ 								console.log(res);
+ 							}else {
+ 								throw new Error(res.rtmsg);
+ 							}
+ 						}).catch(err=>{
+ 							//오류로직처리(오류는 캐치절에서 잡아낸다)
+ 							errmsg.textContent = err.message;
+ 						})
+ 	};
+ 	const modiBtn_f = e => {
+ 		console.log('modiBtn_f');
+ 		
+		const data = {"id":$id.value, "pw":$pw.value, "name":$name.value};
+ 		
+ 		fetch('/api/members/'+$id.value, 
+ 					{method: 'PATCH', 
+ 						headers:{
+ 						'Content-Type' : 'application/json', 
+ 						'Accept' : 'application/json'}, 
+ 						body: JSON.stringify(data)})
+ 						.then(res=>res.json())
+ 						.then(res=>{
+ 							if(res.rtcd == '00') {
+ 								//성공로직처리
+ 								console.log(res);
+ 							}else {
+ 								throw new Error(res.rtmsg);
+ 							}
+ 						}).catch(err=>{
+ 							//오류로직처리
+ 							errmsg.textContent = err.message;
+ 						})
+ 	};
+ 	const findBtn_f = e => {
+ 		console.log('findBtn_f');
+ 		
+ 		fetch('/api/members/'+$id.value, 
+				{method: 'GET'})
+					.then(res=>res.json())
+					.then(res=>{
+						if(res.rtcd == '00') {
+							//성공로직처리
+							console.log(res);
+						}else {
+							throw new Error(res.rtmsg);
+						}
+					}).catch(err=>{
+						//오류로직처리
+						errmsg.textContent = err.message;
+					})
+ 	};
+ 	const delBtn_f = e => {
+ 		console.log('delBtn_f');
+ 		
+ 		fetch('/api/members/'+$id.value, 
+				{method: 'DELETE'})
+					.then(res=>res.json())
+					.then(res=>{
+						if(res.rtcd == '00') {
+							//성공로직처리
+							console.log(res);
+						}else {
+							throw new Error(res.rtmsg);
+						}
+					}).catch(err=>{
+						//오류로직처리
+						errmsg.textContent = err.message;
+					})
+ 	};
+ 	const allBtn_f = e => {
+ 		console.log('allBtn_f');
+ 		
+ 		fetch('/api/members/all', 
+				{method: 'GET'})
+					.then(res=>res.json())
+					.then(res=>{
+						if(res.rtcd == '00') {
+							//성공로직처리
+							console.log(res);
+						}else {
+							throw new Error(res.rtmsg);
+						}
+					}).catch(err=>{
+						//오류로직처리
+						errmsg.textContent = err.message;
+					})
+ 	};
+	const clearBtn_f = e => {
+ 		console.log('clearBtn_f');
+ 		
+ 		fetch('/api/members/all', 
+					{method: 'DELETE'})
+						.then(res=>res.json())
+						.then(res=>{
+							if(res.rtcd == '00') {
+								//성공로직처리
+								console.log(res);
+							}else {
+								throw new Error(res.rtmsg);
+							}
+						}).catch(err=>{
+							//오류로직처리
+							errmsg.textContent = err.message;
+						})
+ 	};
+ 	addBtn.addEventListener("click", addBtn_f);
+ 	modiBtn.addEventListener("click", modiBtn_f);
+ 	findBtn.addEventListener("click", findBtn_f);
+ 	delBtn.addEventListener("click", delBtn_f);
+ 	allBtn.addEventListener("click", allBtn_f);
+ 	clearBtn.addEventListener("click", clearBtn_f);
+ </script>
+</body>
+</html>

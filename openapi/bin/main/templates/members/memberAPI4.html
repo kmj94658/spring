@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/js/ajaxCall.js"></script>
+</head>
+<body>
+	<h3>HTTP API AJAX TEST!</h3>
+	<form action="">
+		아이디: <input type="text" name="id" id="id" /><br />
+		비밀번호: <input type="text" name="pw" id="pw" /><br />
+		이름: <input type="text" name="name" id="name" /><br />
+	</form>
+	<div id="errmsg"></div>
+	<div><button type="button" id="addBtn">등록</button></div>
+	<div><button type="button" id="modiBtn">수정</button></div> 
+	<div><button type="button" id="findBtn">조회</button></div> 
+	<div><button type="button" id="delBtn">삭제</button></div> 
+	<div><button type="button" id="allBtn">전체목록</button></div> 
+	<div><button type="button" id="clearBtn">전체삭제</button></div> 
+  <h3>회원목록</h3>
+  <table border="1">
+    <thead>
+	    <tr>
+	      <th>아이디</th>
+	      <th>비밀번호</th>
+	      <th>이름</th>
+	    </tr>
+	   </thead>
+    <tbody id="data"></tbody>
+    </table>
+ <script>
+ 	const $id = document.getElementById('id');
+	const $pw = document.getElementById('pw');
+	const $name = document.getElementById('name');
+	
+ 	const addBtn_f = e => {
+ 		console.log('addBtn_f');
+ 		
+ 		const URL = '/api/members';
+ 		const data = {"id":$id.value, "pw":$pw.value, "name":$name.value};
+ 		
+ 		
+ 		request.post(URL, data)
+ 						.then(res=>res.json())
+ 						.then(res=>{
+ 							if(res.rtcd == '00') {
+ 								//성공로직처리
+ 								console.log(res);
+ 								allBtn_f();
+ 							}else {
+ 								throw new Error(res.rtmsg);
+ 							}
+ 						}).catch(err=>{
+ 							//오류로직처리
+ 							errmsg.textContent = err.message;
+ 						})
+ 	};
+ 	const modiBtn_f = e => {
+ 		console.log('modiBtn_f');
+ 		
+ 		const URL = `/api/members/${$id.value}`;
+ 		const data = {"id":$id.value, "pw":$pw.value, "name":$name.value};
+ 		
+ 		request.patch(URL, data)
+ 						.then(res=>res.json())
+ 						.then(res=>{
+ 							if(res.rtcd == '00') {
+ 								//성공로직처리
+ 								console.log(res);
+ 								allBtn_f();
+ 							}else {
+ 								throw new Error(res.rtmsg);
+ 							}
+ 						}).catch(err=>{
+ 							//오류로직처리
+ 							errmsg.textContent = err.message;
+ 						})
+ 	};
+ 	const findBtn_f = e => {
+ 		console.log('findBtn_f');
+ 		
+ 		const URL = `/api/members/${$id.value}`;
+ 		
+ 		request.get(URL)
+					.then(res=>res.json())
+					.then(res=>{
+						if(res.rtcd == '00') {
+							//성공로직처리
+							console.log(res);
+							const data = res.data;
+							
+							let html = '';
+				        html += `<tr>`;
+				        html += `  <td>${data.id}</td>`;
+				        html += `  <td>${data.pw}</td>`;
+				        html += `  <td>${data.name}</td>`;
+				        html += `</tr>`;  
+							document.querySelector('#data').innerHTML = html;
+						}else {
+							throw new Error(res.rtmsg);
+						}
+					}).catch(err=>{
+						//오류로직처리
+						errmsg.textContent = err.message;
+					})
+ 	};
+ 	const delBtn_f = e => {
+ 		console.log('delBtn_f');
+ 		
+ 		const URL = `/api/members/${$id.value}`;
+ 		
+ 		request.delete(URL)
+					.then(res=>res.json())
+					.then(res=>{
+						if(res.rtcd == '00') {
+							//성공로직처리
+							console.log(res);
+							allBtn_f();
+						}else {
+							throw new Error(res.rtmsg);
+						}
+					}).catch(err=>{
+						//오류로직처리
+						errmsg.textContent = err.message;
+					})
+ 	};
+ 	const allBtn_f = e => {
+ 		console.log('allBtn_f');
+ 		
+ 		const URL = '/api/members/all';
+ 		
+ 		request.get(URL)
+					.then(res=>res.json())
+					.then(res=>{
+						if(res.rtcd == '00') {
+							//성공로직처리
+							console.log(res);
+							const data = res.data;
+							
+							let html = '';
+							data.forEach(rec => { 
+						        html += `<tr>`;
+						        html += `  <td>${rec.id}</td>`;
+						        html += `  <td>${rec.pw}</td>`;
+						        html += `  <td>${rec.name}</td>`;
+						        html += `</tr>`;  
+						  });
+							document.querySelector('#data').innerHTML = html;
+						}else {
+							throw new Error(res.rtmsg);
+						}
+					}).catch(err=>{
+						//오류로직처리
+						errmsg.textContent = err.message;
+					})
+ 	};
+	const clearBtn_f = e => {
+ 		console.log('clearBtn_f');
+ 		
+ 		const URL = '/api/members/all';
+ 		
+ 		request.delete(URL)
+						.then(res=>res.json())
+						.then(res=>{
+							if(res.rtcd == '00') {
+								//성공로직처리
+								console.log(res);
+								allBtn_f();
+							}else {
+								throw new Error(res.rtmsg);
+							}
+						}).catch(err=>{
+							//오류로직처리
+							errmsg.textContent = err.message;
+						})
+ 	};
+ 	addBtn.addEventListener("click", addBtn_f);
+ 	modiBtn.addEventListener("click", modiBtn_f);
+ 	findBtn.addEventListener("click", findBtn_f);
+ 	delBtn.addEventListener("click", delBtn_f);
+ 	allBtn.addEventListener("click", allBtn_f);
+ 	clearBtn.addEventListener("click", clearBtn_f);
+ </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/js/ajaxCall.js"></script>
+</head>
+<body>
+	<h3>HTTP API AJAX TEST!</h3>
+ <div><button type="button" id="addBtn">등록</button></div>
+ <div><button type="button" id="modiBtn">수정</button></div> 
+ <div><button type="button" id="findBtn">조회</button></div> 
+ <div><button type="button" id="delBtn">삭제</button></div> 
+ <div><button type="button" id="allBtn">전체목록</button></div> 
+ <div><button type="button" id="clearBtn">전체삭제</button></div> 
+ <script>
+ 	const addBtn_f = e => {
+ 		console.log('addBtn_f');
+ 	};
+ 	const modiBtn_f = e => {
+ 		console.log('modiBtn_f');
+ 	};
+ 	const findBtn_f = e => {
+ 		console.log('findBtn_f');
+ 	};
+ 	const delBtn_f = e => {
+ 		console.log('delBtn_f');
+ 	};
+ 	const allBtn_f = e => {
+ 		console.log('allBtn_f');
+ 	};
+	const clearBtn_f = e => {
+ 		console.log('clearBtn_f');
+ 	};
+ 	addBtn.addEventListener("click", addBtn_f);
+ 	modiBtn.addEventListener("click", modiBtn_f);
+ 	findBtn.addEventListener("click", findBtn_f);
+ 	delBtn.addEventListener("click", delBtn_f);
+ 	allBtn.addEventListener("click", allBtn_f);
+ 	clearBtn.addEventListener("click", clearBtn_f);
+ </script>
+</body>
+</html>

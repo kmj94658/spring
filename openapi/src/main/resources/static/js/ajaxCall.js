@@ -1,11 +1,8 @@
-/**
- * 
- */
  'use strict';
  
  const request = {
 	get(url) {
-		return fetch(url);
+		return fetch(url, {method: 'GET'});
 	},
 	
 	post(url,payload) {
@@ -16,16 +13,16 @@
 		})
 	},
 	
-	petch(url,payload) {
+	patch(url,payload) {
 		return fetch(url, {
-			method:'path',
+			method:'PATCH',
 			headers:{'content-Type': 'application/json'},
 			body: JSON.stringify(payload)
 		})
 	},
 	
 	delete(url){
-		return fetch(url, {method: 'delete'});
+		return fetch(url, {method: 'DELETE'});
 	}
 	
 };

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/js/ajaxCall.js"></script>
+</head>
+<body>
+	<h3>HTTP API AJAX TEST!</h3>
+	<div id="log"></div>
+	<form action="">
+		아이디: <input type="text" name="id" id="id" /><br />
+		비밀번호: <input type="text" name="pw" id="pw" /><br />
+		이름: <input type="text" name="name" id="name" /><br />
+	</form>
+	<div id="errmsg"></div>
+	<div><button type="button" id="addBtn">등록</button></div>
+	<div><button type="button" id="modiBtn">수정</button></div> 
+	<div><button type="button" id="findBtn">조회</button></div> 
+	<div><button type="button" id="delBtn">삭제</button></div> 
+	<div><button type="button" id="allBtn">전체목록</button></div> 
+	<div><button type="button" id="clearBtn">전체삭제</button></div> 
+ <script>
+ 	const $id = document.getElementById('id');
+ 	const $pw = document.getElementById('pw');
+ 	const $name = document.getElementById('name');
+ 	const addBtn_f = e => {
+ 		console.log('addBtn_f');
+ 		
+ 		//XMLHttpRequest 객체 생성 => web api
+ 		const xhr = new XMLHttpRequest();
+ 		
+ 		//Http 요청 초기화
+ 		xhr.open('POST', '/api/members')
+ 		
+ 		//Http 요청 헤더(바디가 어떤 타입의 데이터인지 헤더에 기술해야한다)
+ 		xhr.setRequestHeader('content-type','application/json');
+ 		xhr.setRequestHeader('accept','application/json');
+ 		
+ 		const data = {
+ 				"id" : $id.value,
+ 				"pw" : $pw.value,
+ 				"name" : $name.value
+ 		}
+ 		
+ 		//Http 요청 전송
+ 		xhr.send( JSON.stringify(data) );
+ 		
+ 		const log = document.getElementById('log');
+ 		const handleEvent = e => {
+	  	//console.log(e);
+ 			//log.textContent = log.textContent + `${e.type}: ${e.loaded} bytes transferred\n`;
+ 			if(e.type == 'load' && xhr.status == 200) { //status는 응답코드
+ 				//console.log(xhr.response);
+ 				//console.log(xhr.responseText);
+ 				const jsObj = JSON.parse(xhr.responseText);
+ 				//console.log(jsObj.rtcd, jsObj.rtmsg);
+ 				if(jsObj.rtcd != '00') {
+ 					alert(jsObj.rtmsg)
+ 				}
+ 			}
+ 	 	}
+
+ 		//핸들 이벤트 센서 달기
+ 		xhr.addEventListener('loadstart', handleEvent);
+ 	  xhr.addEventListener('load', handleEvent);
+ 	  xhr.addEventListener('loadend', handleEvent);
+    xhr.addEventListener('progress', handleEvent);
+    xhr.addEventListener('error', handleEvent);
+    xhr.addEventListener('abort', handleEvent);
+
+ 	};
+ 	const modiBtn_f = e => {
+ 		console.log('modiBtn_f');
+ 		const xhr = new XMLHttpRequest();
+ 		xhr.open('PATCH','/api/members/id1');
+ 		xhr.setRequestHeader('content-type','application/json');
+ 		xhr.setRequestHeader('accept','application/json');
+ 		xhr.send( JSON.stringify( {"id":"id1", "pw":"pw1-1","name":"name1-1"} ));
+ 		xhr.addEventListener('load', e=> {
+ 			console.log(xhr.responseText);
+ 		})
+ 	};
+ 	const findBtn_f = e => {
+ 		console.log('findBtn_f');
+ 		const xhr = new XMLHttpRequest();
+ 		xhr.open('GET','/api/members/id1');
+ 		xhr.send(); //send 할 것 없어서 빈칸
+ 		xhr.addEventListener('load', e=> {
+ 			console.log(xhr.responseText);
+ 		})
+ 	};
+ 	const delBtn_f = e => {
+ 		console.log('delBtn_f');
+ 		const xhr = new XMLHttpRequest();
+ 		xhr.open('DELETE','/api/members/id1');
+ 		xhr.send();
+ 		xhr.addEventListener('load', e=> {
+ 			console.log(xhr.responseText);
+ 		})
+ 	};
+ 	const allBtn_f = e => {
+ 		console.log('allBtn_f');
+ 		const xhr = new XMLHttpRequest();
+ 		xhr.open('GET','/api/members/all');
+ 		xhr.send();
+ 		xhr.addEventListener('load', e=> {
+ 			console.log(xhr.responseText);
+ 		})
+ 	};
+	const clearBtn_f = e => {
+ 		console.log('clearBtn_f');
+ 		const xhr = new XMLHttpRequest();
+ 		xhr.open('DELETE','/api/members/all');
+ 		xhr.send();
+ 		xhr.addEventListener('load', e=> {
+ 			console.log(xhr.responseText);
+ 		})
+ 	};
+ 	
+ 	addBtn.addEventListener("click", addBtn_f);
+ 	modiBtn.addEventListener("click", modiBtn_f);
+ 	findBtn.addEventListener("click", findBtn_f);
+ 	delBtn.addEventListener("click", delBtn_f);
+ 	allBtn.addEventListener("click", allBtn_f);
+ 	clearBtn.addEventListener("click", clearBtn_f);
+ </script>
+</body>
+</html>

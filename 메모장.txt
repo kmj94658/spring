@@ -1,0 +1,202 @@
+REST API
+-REST를 기반으로 구현한 서비스api
+-자원, 행위, 표현의 3가지로 구성
+	자원 - 리소스
+	행위 - 리소스에 대한 행위(메소드) http요청메소드 (메소드를 잘쓰면 url을 간소하게 가져갈 수 있다)
+	표현 - 페이로드(근본데이터)
+-http 프로토콜의 post,get,put,patch,delete 메서드를 각각 crud 동작과 연결하는 것을 RESTful하다 라고 말한다.
+
+http요청 메소드	종류	목적			페이로드
+get		index	모든/특정 리소스 취득	X
+post		create	리소스 생성		O
+put		replace	리소스의 전체 교체		O
+patch		modify	리소스의 일부 수정		O
+delete		delete	모든/특정 리소스 삭제	X
+
+-uri 매핑전략을 짤때 
+
+<회원예제>
+-uri : 리소스, 명사를 사용
+요청		메소드	URI			페이로드	양식
+-회원가입양식	get	/members/add		X	addForm.html
+-회원가입처리	post	/members/add		O	
+-회원수정양식	get 	/members/{id}/edit		X	editForm.html
+			/members/edit/?id=000
+-회원수정처리	patch	/members/{id}/edit		O
+			/members/edit/?id=000
+-회원조회		get	/members/{id}		X	detail.html
+-회원탈퇴		delete	/members/{id}		X
+-회원목록		get	/members		X	members.html
+			/members/{page}/{size}
+
+@Valid : 유효성 검증하는 객체
+@NotBlank 문자열, NotNull이면서 문자길이가 0보다 커야한다
+@NotEmpty 문자열, 컬렉션타입, NotNull이면서 문자길이가 0보다 크거나 컬렉션은 1개 이상
+@NotNull 모든타입
+
+빌트인 constraints
+https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#section-builtin-constraints
+
+BindingResult : 유효성 검증의 결과를 받아오는 객체
+Reject, RejectValue 메소드
+
+타임리프 오류
+th:errors="${}"
+스타일 주고싶다면
+th:errorclass="클래스명"
+
+글로벌 오류
+th:if="${#fields.hasErrors('global')}"
+th:if="${#fields.hasGlobalErrors()}" 두개 똑같다.
+
+@ModelAttribute 
+1. view 데이터를 개체에 바인딩할 때 사용
+2. model객체에 소문자이름으로 저장된다
+ex) @ModelAttribute MemberForm memberForm
+ex) model.addAttribute("memberForm", memberForm)
+
+폼 태그에 th:object 속성주기
+ex) <form th:object="${memberForm}">
+폼태그와 memberForm 객체가 바인딩 된다.
+그러면 ${memberForm.id} 대신 *{id}로 접근 가능(코드 줄이기 가능!) 
+마찬가지로 에러도 th:errors="*{id}"로 접근 가능
+
+폼태그 내에서 for속성과 id가 같아야 싱크 맞춰진다. (텍스트 클릭해도 체크 먹음)
+
+정규표현식(비밀번호 조합 가능)
+
+1.세션 동작방식에 대한 이해
+  클라이언트 인증성공 -> 세션생성(server) -> 세션아이디 쿠키 지정(client) -> 이후 클라이언트 요청시 세션아이디를 요청헤더에 포함
+2.세션 생성
+  HttpServletRequest request
+  HttpSession session = request.getSession(true); --세션이 없으면 신규생성, 있으면 해당세션 가져온다
+3.세션 가져오기
+ HttpSession session = request.getSession(false); --세션이 존재하면 가져오고 없어도 신규생성하지는 않는다
+4.세션 제거(-로그아웃 했을때, -안하고 그냥 브라우저 나가면 모르기 때문에 유효시간 설정)
+  session.invalidate();
+5.세션에 클라이언트 정보 저장
+  session.setAttribute('키','값');
+6.세션에 클라이언트 정보 읽기
+  session.getAttribute('키');
+7.세션 유효시간(최근 요청시간을 기준으로 갱신) 4번과 병행
+  글로벌 설정 -> application.properties : server.servlet.session.time=1800 (분단위로 설정, 기본은 30분)
+  특정세션단위 설정 -> session.setMaxInactiveInterval(900);
+
+-클라이언트 정보(세션아이디)
+-세션이 왜 존재하는가: 한번 리스폰스 하고나면 정보가 끊김. 클라이언트와 서버간의 상태정보를 유지하기 위한 기술
+
+1.view
+ 회원가입, 회원조회, 회원수정
+2.controller
+-url매핑, REST api
+-검증로직
+3.service
+-controller와 repository 사이의 매핑
+4.repository
+-db연동
+
+AJAX(Asynchornous JavaScript and XML) 비동기 통신을 자바스트립트로 한다 XML,JSON 포맷으로
+모델을 포함한 정적인 html을 만들어 클라이언트에 전달
+
+데이터 포맷 : json, xml (필수적인 요소는 데이터와 메타데이터)
+이걸 주고받기 위한 기술요소가 ajax, rest api
+javascript object <=> json 포맷의 문자열
+json객체를 브라우저에서 제공함. 
+json.parse() : json문자열 => js object
+json.stringfy() : js object => json 포맷 문자열
+
+java object <=> json 포맷의 문자열
+jackson,gson 라이브러리 사용
+
+문자열로 주고받음. 문자열은 통용되기 때문
+
+json 형식으로 데이터만 보내면 불필요한 데이터 통신 X 기다림X (뷰,데이터 같이 보내지 않고)
+
+json 표기방식
+키는 반드시 큰따옴표
+값은 객체 리터럴과 같은 표기법. 숫자나 boolean타입은 큰따옴표 생략 가능. 문자열은 반드시 큰따옴표
+포맷은 json 이지만 문자열이다. 추출하려면 문자열 다루는 것 필요. 까다롭. 그래서 메소드 이용해서 .으로 접근 가능
+
+json의 정적메소드
+json.stringify() : js 객체 => json 포맷 문자열로 전송
+json.parse() : json문자열 => js 객체로 변환
+
+타임리프로 ssr (언어마다 다양하다) 자바에서는 jsp나 thymeleaf
+csr 사이드 에서의 렌더링은 ajax
+
+
+자바 컬렉션
+List - 순서가 있다. 인덱스로 접근. 데이터 중복 허용 
+Set - 순서 중요하지 X. 중복 허용 X. 같은 값 넣으면 대체됨
+Map - 사전 생각하기. 키와 밸류. 키에도 객체, 값에도 객체 생성 가능. 키는 중복허용 X. 
+
+Array는 고차함수 적용 가능. 
+
+500번 오류는 서버에서 렌더링할때 오류
+
+로그인할때 아이디 또는 비밀번호가 잘못되었습니다 -> 글로벌 오류( 필드 레벨 오류 아님!)
+BindingResult에서 오류 관리
+
+클라이언트가 전달한 내용은 loginForm 으로 전달
+@valid 붙여야 폼객체에서 유효성 관련 어노테이션 달수있다 (필드레벨 오류 관리)
+valid 지우면 글로벌 오류만 뜬다.
+글로벌오류를 표현하려면 html파일 form태그에 th:object속성 줘야한다.
+input태그안에 th:field *{ } 속성주면 name,id 속성 생략가능하다.
+
+th:errorclass는 오류메세지 스타일 속성 주기 위해.
+
+쿠키값 통해서 세션 찾아갈 수 있다
+getSession(true) 없으면 세션 생성 있으면 찾아오기
+
+로그인 입력받을때 폼 객체 생성해서 받으면 편리하다 (나중에 유효성 검사나...)
+데이터 어노테이션 쓰기
+
+1. 세션 생성
+2. 세션 제거
+3. 세션정보 읽어오기(프론트, 백엔드)
+4. 유효성 체크
+
+log 레벨
+trace < debug < info < warn < error
+application.properties에서 설정 가능
+루트레벨, 패키지별 레벨 설정 가능
+
+클래스이름 뒤 <> 은 제너릭 타입
+클래스 객체 생성할 때 파라미터로 들어온다 (컴파일 시점)
+
+@ControllerAdvice @ExceptionHandler 이용해서 예외처리 가능
+
+메일발송하기
+1. 의존성 추가
+ implementation 'org.springframework.boot:spring-boot-starter-mail'
+
+2. application properties 추가
+#mail
+spring.mail.host: smtp.gmail.com
+spring.mail.port: 587
+spring.mail.username: your email
+spring.mail.password: your password
+spring.mail.properties.mail.smtp.auth: true
+spring.mail.properties.mail.smtp.starttls.enable: true
+
+framework & library
+누가 코드를 제어하는가?
+프레임워크와 라이브러리의 차이는 흐름(Flow)에 대한 제어 권한이 어디에 있느냐의 차이입니다.
+프레임워크는 전체적인 흐름을 자체적으로 가지고 있으며, 
+프로그래머가 그 안에 필요한 코드를 작성하는 반면에 
+라이브러리는 사용자가 흐름에 대해 제어를 하며 필요한 상황에 가져다 쓰는 것입니다.
+
+framework ex) spring, Junit, mybatis, jpa, bootstrap, angularJS, vue
+library ex) react, jQuery, java표준
+
+오픈소스 활용 능력
+라이브러리, 프레임워크 장단점을 파악해서 프로젝트에 이점이 돼서 도입할건지
+
+프레임워크(기성복) - 틀이 잡혀 있어 누가 하든 품질, 생산성이 어느정도 보장되어 있다.
+		  제3자가 정해놓은 룰을 따라야 한다. 
+		  자율성이 떨어짐. 구조를 제대로 이해하고 써야한다.
+		  자주 써보고 구조가 익숙하다면 장점으로 활용 가능
+		  빨리 만들어야할 때
+라이브러리(맞춤복) - 내가 라이브러리를 가져와서 적용. 내가 만들고자 하는 어플리케이션을 제어.
+		  유연하다 <-> 정리가 안돼 난잡해질수 있다
+		  코딩에 대한 성숙도가 있을 때
